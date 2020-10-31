@@ -140,26 +140,26 @@ Install HAProxy on pgvm5 using the script [setup/install_HA.sh](https://github.c
 Configure HAProxy parameter file with the values located at [/etc/haproxy/haproxy.cfg](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm5/haproxy.cfg)
 
 Start HAProxy:
-`root@pgvm5:# systemctl start haproxy</br>
-root@pgvm5:~# systemctl status haproxy</br>
-● haproxy.service - HAProxy Load Balancer</br>
-   Loaded: loaded (/lib/systemd/system/haproxy.service; enabled; vendor preset: enabled)</br>
-   Active: active (running) since Sat 2020-10-31 11:53:15 UTC; 3s ago</br>
-     Docs: man:haproxy(1)</br>
-           file:/usr/share/doc/haproxy/configuration.txt.gz</br>
-  Process: 2988 ExecStartPre=/usr/sbin/haproxy -f $CONFIG -c -q $EXTRAOPTS (code=exited, status=0/SUCCESS)</br>
- Main PID: 2998 (haproxy)</br>
-    Tasks: 2 (limit: 4632)</br>
-   CGroup: /system.slice/haproxy.service</br>
-           ├─2998 /usr/sbin/haproxy -Ws -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid</br>
-           └─3000 /usr/sbin/haproxy -Ws -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid</br>
-
-Oct 31 11:53:15 pgvm5 systemd[1]: Starting HAProxy Load Balancer...</br>
-Oct 31 11:53:15 pgvm5 haproxy[2998]: Proxy stats started.</br>
-Oct 31 11:53:15 pgvm5 haproxy[2998]: Proxy stats started.</br>`
-Oct 31 11:53:15 pgvm5 haproxy[2998]: Proxy postgres started.</br>
-Oct 31 11:53:15 pgvm5 haproxy[2998]: Proxy postgres started.</br>
-Oct 31 11:53:15 pgvm5 systemd[1]: Started HAProxy Load Balancer.</br>
+`root@pgvm5:# systemctl start haproxy`</br>
+`root@pgvm5:~# systemctl status haproxy`</br>
+`● haproxy.service - HAProxy Load Balancer`</br>
+`   Loaded: loaded (/lib/systemd/system/haproxy.service; enabled; vendor preset: enabled)`</br>
+`   Active: active (running) since Sat 2020-10-31 11:53:15 UTC; 3s ago`</br>
+`     Docs: man:haproxy(1)`</br>
+`           file:/usr/share/doc/haproxy/configuration.txt.gz`</br>
+`  Process: 2988 ExecStartPre=/usr/sbin/haproxy -f $CONFIG -c -q $EXTRAOPTS (code=exited, status=0/SUCCESS)`</br>
+` Main PID: 2998 (haproxy)`</br>
+`    Tasks: 2 (limit: 4632)`</br>
+`   CGroup: /system.slice/haproxy.service`</br>
+`           ├─2998 /usr/sbin/haproxy -Ws -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid`</br>
+`           └─3000 /usr/sbin/haproxy -Ws -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid`</br>
+` `
+`Oct 31 11:53:15 pgvm5 systemd[1]: Starting HAProxy Load Balancer...`</br>
+`Oct 31 11:53:15 pgvm5 haproxy[2998]: Proxy stats started.`</br>
+`Oct 31 11:53:15 pgvm5 haproxy[2998]: Proxy stats started.`</br>
+`Oct 31 11:53:15 pgvm5 haproxy[2998]: Proxy postgres started.`</br>
+`Oct 31 11:53:15 pgvm5 haproxy[2998]: Proxy postgres started.`</br>
+`Oct 31 11:53:15 pgvm5 systemd[1]: Started HAProxy Load Balancer.`</br>
 
 
 
