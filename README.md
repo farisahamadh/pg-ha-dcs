@@ -24,7 +24,7 @@ Execute following scripts to install the required packages.
 
 Install Postgres, Patroni On VMs pgvm1, pgvm2 & pgvm3 by executing the following script.
 
-[setup/install_postgres.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_postgres.sh)
+[setup/install_postgres.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_postgres.sh)</br>
 [setup/install_patroni.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_patroni.sh)
 
 
