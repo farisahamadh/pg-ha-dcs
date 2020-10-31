@@ -15,7 +15,14 @@ apt-get upgrade -y
 echo "Completed system update"
 sleep 1
 
-echo "Retrieving source code from github"
+echo "Adding latest PG repository"
+sleep 2
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |sudo tee  /etc/apt/sources.list.d/pgdg.list
+echo "Completed adding latest PG repository"
+sleep 1
+
+echo "Retrieving pgbackrest source code from github"
 sleep 2
 wget https://github.com/pgbackrest/pgbackrest/archive/release/2.30.zip
 unzip pgbackrest-release-2.30.zip
