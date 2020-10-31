@@ -36,8 +36,42 @@ Execute following scripts to install the required packages.
 [setup/install_pgbackrest.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_pgbackrest.sh)</br>
 
 #### Configuration
-#####etcd
-is an open source distributed key-value store used to hold and manage the critical information that distributed systems need to keep running. All of the Postgres nodes make use of etcd to keep the Postgres cluster up and running using Patroni.
+etcd is an open source distributed key-value store used to hold and manage the critical information that distributed systems need to keep running. Patroni makes use of  etcd to keep the Postgres cluster up and running.
+
+On pgvm4, Update etcd configuration  [/etc/default/etcd](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm4) with following values.
+`ETCD_LISTEN_PEER_URLS="http://50.51.52.84:2380"`</br>
+`ETCD_LISTEN_CLIENT_URLS="http://localhost:2379,http://50.51.52.84:2379"`</br>
+`ETCD_INITIAL_ADVERTISE_PEER_URLS="http://50.51.52.84:2380"`</br>
+`ETCD_INITIAL_CLUSTER="etcd=http://50.51.52.84:2380"`</br>
+`ETCD_INITIAL_CLUSTER_STATE="new"`</br>
+`ETCD_INITIAL_CLUSTER_TOKEN="etcd-pg-cluster"`</br>
+`ETCD_ADVERTISE_CLIENT_URLS="http://50.51.52.84:2379"`</br>
+
+Save and close the file when fiinished and start etcd with the below command.
+`systemctl start etcd`</br>
+
+Check the status of of etcd with following commands.
+`root@pgvm4:~# systemctl status etcd`</br>
+`● etcd.service - etcd - highly-available key value store`</br>
+`   Loaded: loaded (/lib/systemd/system/etcd.service; disabled; vendor preset: enabled)`</br>
+`   Active: active (running) since Sat 2020-10-31 04:47:35 UTC; 5h 49min ago`</br>
+`     Docs: https://github.com/coreos/etcd`</br>
+`           man:etcd`</br>
+` Main PID: 1582 (etcd)`</br>
+`    Tasks: 11 (limit: 4632)`</br>
+`   CGroup: /system.slice/etcd.service`</br>
+`           └─1582 /usr/bin/etcd`</br>`</br>
+
+`root@pgvm4:~# etcdctl cluster-health`</br>
+`member 8e9e05c52164694d is healthy: got healthy result from http://50.51.52.84:2379`</br>
+`cluster is healthy`</br>`</br>
+
+`root@pgvm4:~# etcdctl member list`</br>
+`8e9e05c52164694d: name=pgvm4 peerURLs=http://localhost:2380 clientURLs=http://50.51.52.84:2379 isLeader=true`</br>
+
+
+
+
 
 
 
