@@ -226,8 +226,16 @@ Check pgbackrest configuration on all 3 Postgres nodes.
 `2020-10-31 09:09:15.681 P00   INFO: check command end: completed successfully (3046ms)`</br>
 
 <b>pgvm2</b></br>
-<b>pgvm3</b></br>
+`postgres@pgvm2:~$ pgbackrest --stanza=main --log-level-console=info check`</br>
+`2020-10-31 09:10:15.763 P00   INFO: check command begin 2.30: --log-level-console=info --log-level-file=detail --pg1-path=/var/lib/postgresql/data --pg1-port=5432 --pg1-socket-path=/var/run/postgresql --repo1-host=50.51.52.86 --repo1-host-user=postgres --stanza=main`</br>
+`2020-10-31 09:10:17.269 P00   INFO: switch wal not performed because this is a standby`</br>
+`2020-10-31 09:10:17.370 P00   INFO: check command end: completed successfully (1608ms)`</br>
 
+<b>pgvm3</b></br>
+`postgres@pgvm3:~$ pgbackrest --stanza=main --log-level-console=info check`</br>
+`2020-10-31 05:10:59.648 P00   INFO: check command begin 2.30: --log-level-console=info --log-level-file=detail --pg1-path=/var/lib/postgresql/data --pg1-port=5432 --pg1-socket-path=/var/run/postgresql --repo1-host=50.51.52.86 --repo1-host-user=postgres --stanza=main`</br>
+`2020-10-31 05:11:01.073 P00   INFO: switch wal not performed because this is a standby`</br>
+`2020-10-31 05:11:01.179 P00   INFO: check command end: completed successfully (1532ms)`</br>
 
 
 
