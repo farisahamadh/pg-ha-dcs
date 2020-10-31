@@ -187,6 +187,11 @@ Exchange ssh keys to allow password-less login between all 4 hosts.
 
 Create configuration directories required for pgbackrest on VMs pgvm1, pgvm2 and pgvm3 using the script [setup/create_pgbackrest_dirs.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/create_pgbackrest_dirs.sh)
 
+On each postgres host (pgvm1, pgvm2 and pgvm3), create the pgbackrest.conf to point to repository server using the following files.
+pgvm1: /etc/pgbackrest/pgbackrest.conf at [config/pgvm1/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm1/pgbackrest.conf)
+pgvm2: /etc/pgbackrest/pgbackrest.conf at [config/pgvm2/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm2/pgbackrest.conf)
+pgvm2: /etc/pgbackrest/pgbackrest.conf at [config/pgvm2/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm3/pgbackrest.conf)
+
 On the backup repository server, create pgbackrest configuration file at /etc/pgbackrest/pgbackrest.conf using the script [config/pgvm6/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm6). Make sure that the repository location defined in repo1-path is created and have right permission.
 
 This config file defines all 3  postgres instances are locations, how it is archived, and how it is backed up. It is known as a <b>stanza</b>. In this example "main" is defined as stanza name in the config file.
