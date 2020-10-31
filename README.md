@@ -22,10 +22,25 @@ Linux environment details.</br>
 
 Execute following scripts to install the required packages.
 
-Install Postgres, Patroni On VMs pgvm1, pgvm2 & pgvm3 by executing the following script.
-
+1. Install Postgres, Patroni on VMs pgvm1, pgvm2 & pgvm3 by executing the following scripts.
 [setup/install_postgres.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_postgres.sh)</br>
-[setup/install_patroni.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_patroni.sh)
+[setup/install_patroni.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_patroni.sh)</br>
+
+2. Install etcd on pgvm4 by executing the following script.
+[setup/install_etcd.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_etcd.sh)</br>
+
+3. Install HAProxy on pgvm5 by executing the following script.
+[setup/install_haproxy.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_HA.sh)</br>
+
+4. Install pgbackrest on pgvm1,pgvm2,pgvm3,pgvm6 by executing the following script.
+[setup/install_pgbackrest.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_pgbackrest.sh)</br>
+
+
+
+
+
+
+
 
 
 
