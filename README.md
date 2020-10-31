@@ -160,6 +160,18 @@ Start HAProxy:
 `Oct 31 11:53:15 pgvm5 haproxy[2998]: Proxy postgres started.`</br>
 `Oct 31 11:53:15 pgvm5 systemd[1]: Started HAProxy Load Balancer.`</br>
 
+Test connectivity via HAProxy
+`postgres@pgvm5:~$ psql -h 50.51.52.85 -p 5000 -U postgres`</br>
+`Password for user postgres:`</br>
+`psql (12.4 (Ubuntu 12.4-1.pgdg18.04+1))`</br>
+`Type "help" for help.`</br>
+` `</br>
+`postgres=# \conninfo`</br>
+`You are connected to database "postgres" as user "postgres" on host "50.51.52.85" at port "5000".`</br>
+`postgres=#`</br>
+
+
+
 
 
 
