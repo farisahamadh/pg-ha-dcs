@@ -78,8 +78,8 @@ For example,
 
 > name:<b>pgvm1</b></br>
 >restapi:</br>
->    listen: <b>50.51.52.81:8008</b> </br>
->    connect_address: <b>50.51.52.81:8008</b> </br>
+>    \tlisten: <b>50.51.52.81:8008</b> </br>
+>    \tconnect_address: <b>50.51.52.81:8008</b> </br>
 
 
 
