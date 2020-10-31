@@ -76,12 +76,10 @@ Check the status of of etcd with following commands.
 Create Patroni configuration files for pgvm1,pgvm2 and pgvm3 and ensure following configuration parameters are refering the correct server. 
 For example,
 
-> name:<span style="color:red>pgvm1 </span> </br>
-restapi:
-    listen: <span style="color:red>50.51.52.81:8008 </span>
-    connect_address: <span style="color:red>50.51.52.81:8008 </span>
-
-<span style="color:red> </span>
+> name:<b>pgvm1</b>
+>restapi:
+>    listen: 50.51.52.81:8008 
+>    connect_address: 50.51.52.81:8008 
 
 
 
