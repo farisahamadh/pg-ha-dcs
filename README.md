@@ -12,7 +12,7 @@ This document will walk through the steps to perform PostgreSQL HA setup (1 mast
 |pgvm6 |	pgbackrest repository	| 50.51.52.86| Backup repository server |
 
 #### VMs setup
-Linux environment details.</br>
+OS release version of all the Linux VMs used for this setup.</br>
 `root@pgvm1:~# lsb_release -a`</br>
 `No LSB modules are available.`</br>
 `Distributor ID: Ubuntu`</br>
@@ -20,8 +20,8 @@ Linux environment details.</br>
 `Release:        18.04`</br>
 `Codename:       bionic`</br></br>
 
-Execute following scripts to install the required packages.
 
+Execute following scripts to install the required packages.
 1. Install Postgres 12, Patroni on VMs pgvm1, pgvm2 & pgvm3 by executing the following scripts.
 [setup/install_postgres.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_postgres.sh)</br>
 [setup/install_patroni.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_patroni.sh)</br>
@@ -34,6 +34,10 @@ Execute following scripts to install the required packages.
 
 4. Install pgbackrest on pgvm1,pgvm2,pgvm3,pgvm6 by executing the following script.
 [setup/install_pgbackrest.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_pgbackrest.sh)</br>
+
+#### Configuration
+#####etcd
+is an open source distributed key-value store used to hold and manage the critical information that distributed systems need to keep running. All of the Postgres nodes make use of etcd to keep the Postgres cluster up and running using Patroni.
 
 
 
