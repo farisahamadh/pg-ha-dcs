@@ -222,7 +222,7 @@ Check pgbackrest configuration on all 3 Postgres nodes.
 <b>pgvm1</b></br>
 `postgres@pgvm1:~$ pgbackrest --stanza=main --log-level-console=info check`</br>
 `2020-10-31 09:09:12.636 P00   INFO: check command begin 2.30: --log-level-console=info --log-level-file=detail --pg1-path=/var/lib/postgresql/data --pg1-port=5432 --pg1-socket-path=/var/run/postgresql --repo1-host=50.51.52.86 --repo1-host-user=postgres --stanza=main`</br>
-`2020-10-31 09:09:15.579 P00   <b>INFO: WAL segment 000000130000000000000012 successfully archived to '/var/lib/pgbackrest/archive/main/12-1/0000001300000000/000000130000000000000012-a46534b247e80690628412fec6db0c443cbabea2.gz</b>`</br>
+<pre>2020-10-31 09:09:15.579 P00   <b>INFO: WAL segment 000000130000000000000012 successfully archived to '/var/lib/pgbackrest/archive/main/12-1/0000001300000000/000000130000000000000012-a46534b247e80690628412fec6db0c443cbabea2.gz</b></pre></br>
 `2020-10-31 09:09:15.681 P00   INFO: check command end: completed successfully (3046ms)`</br>
 
 <b>pgvm2</b></br>
