@@ -39,7 +39,7 @@ Execute following scripts to install the required packages.
 ##### etcd
 etcd is an open source distributed key-value store used to hold and manage the critical information that distributed systems need to keep running. Patroni makes use of  etcd to keep the Postgres cluster up and running.
 
-On pgvm4, Update etcd configuration  [/etc/default/etcd](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm4/etcd) with following values.
+On pgvm4, update etcd configuration  [/etc/default/etcd](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm4/etcd) with following values.
 `ETCD_LISTEN_PEER_URLS="http://50.51.52.84:2380"`</br>
 `ETCD_LISTEN_CLIENT_URLS="http://localhost:2379,http://50.51.52.84:2379"`</br>
 `ETCD_INITIAL_ADVERTISE_PEER_URLS="http://50.51.52.84:2380"`</br>
@@ -130,9 +130,12 @@ After adding  second standby.
 `| pgvm3  | 50.51.52.83 | Replica | running |  3 |       0.0 |`</br>
 `+--------+-------------+---------+---------+----+-----------+`</br>
 
+##### HAProxy
+When developing an application that uses a database, it can be cumbersome to keep track of the database endpoints if they keep changing. Using HAProxy simplifies this by giving a single endpoint to which you can connect the application.
 
+HAProxy forwards the connection to whichever node is currently the master. It does this using a REST endpoint that Patroni provides. Patroni ensures that, at any given time, only the master Postgres node will appear as online, forcing HAProxy to connect to the correct node.
 
-
+Install HAProxy on pgvm5 using the script [setup/install_HA.sh](https://github.com/farisahamadh/pgsql-ha/tree/main/setup)
 
 
 
