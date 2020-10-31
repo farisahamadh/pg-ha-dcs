@@ -197,6 +197,11 @@ On the backup repository server, create pgbackrest configuration file at /etc/pg
 
 This config file defines all 3  postgres instances are locations, how it is archived, and how it is backed up. It is known as a <b>stanza</b>. In this example "main" is defined as stanza name in the config file.
 
+When all the configurations are set, it is time to create the <b>stanza</b> "main" on the backup repository host pgvm6.
+
+`postgres@pgvm6:~$ pgbackrest --stanza=main --log-level-console=info stanza-create`</br>
+`2020-10-31 09:06:28.377 P00   INFO: stanza-create command begin 2.30: --log-level-console=info --pg1-host=50.51.52.81 --pg2-host=50.51.52.82 --pg3-host=50.51.52.83 --pg1-path=/var/lib/postgresql/data --pg2-path=/var/lib/postgresql/data --pg3-path=/var/lib/postgresql/data --pg1-port=5432 --pg2-port=5432 --pg3-port=5432 --pg1-socket-path=/var/run/postgresql --pg2-socket-path=/var/run/postgresql --pg3-socket-path=/var/run/postgresql --repo1-path=/var/lib/pgbackrest --stanza=main
+2020-10-31 09:06:33.044 P00   INFO: stanza-create command end: completed successfully (4668ms)`</br>
 
 
 
