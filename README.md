@@ -202,9 +202,9 @@ Modify patroni YAML configuration file to set archive locations to pgbackrest. M
 >    archive_command: 'pgbackrest --stanza=main archive-push %p'</br>
 
 Restart Patroni and PG cluster using the modified YAML files available at,</br>
-pgvm1: [/etc/patroni1.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm1/patroni1.yml)</br>
-pgvm2: [/etc/patroni1.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm2/patroni1.yml)</br>
-pgvm3: [/etc/patroni1.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm3/patroni1.yml)</br>
+pgvm1: /etc/patroni1.yml using [config/pgvm1/patroni1.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm1/patroni1.yml)</br>
+pgvm2: /etc/patroni1.yml using [config/pgvm2/patroni1.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm2/patroni1.yml)</br>
+pgvm3: /etc/patroni1.yml using [config/pgvm3/patroni1.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm3/patroni1.yml)</br>
 
 
 On the backup repository server, create pgbackrest configuration file at /etc/pgbackrest/pgbackrest.conf using the script [config/pgvm6/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm6). Make sure that the repository location defined in repo1-path is created and have right permission.
@@ -222,7 +222,7 @@ Check pgbackrest configuration on all 3 Postgres nodes.
 <b>pgvm1</b></br>
 `postgres@pgvm1:~$ pgbackrest --stanza=main --log-level-console=info check`</br>
 `2020-10-31 09:09:12.636 P00   INFO: check command begin 2.30: --log-level-console=info --log-level-file=detail --pg1-path=/var/lib/postgresql/data --pg1-port=5432 --pg1-socket-path=/var/run/postgresql --repo1-host=50.51.52.86 --repo1-host-user=postgres --stanza=main`</br>
-`2020-10-31 09:09:15.579 P00   INFO: WAL segment 000000130000000000000012 successfully archived to '/var/lib/pgbackrest/archive/main/12-1/0000001300000000/000000130000000000000012-a46534b247e80690628412fec6db0c443cbabea2.gz`</br>
+`2020-10-31 09:09:15.579 P00   <b>INFO: WAL segment 000000130000000000000012 successfully archived to '/var/lib/pgbackrest/archive/main/12-1/0000001300000000/000000130000000000000012-a46534b247e80690628412fec6db0c443cbabea2.gz</b>`</br>
 `2020-10-31 09:09:15.681 P00   INFO: check command end: completed successfully (3046ms)`</br>
 
 <b>pgvm2</b></br>
