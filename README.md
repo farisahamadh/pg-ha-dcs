@@ -91,7 +91,7 @@ For example,
 
 Patroni configuration is stored in the DCS (Distributed Configuration Store), etcd in this case and these options are set in DCS at any time.
 
-Time to Live(ttl) is defined as 30 seconds. ie, if primary is not reachable for 30 seconds DCS will elect a new leader node(master)
+Time to Live(ttl) is defined as 30 seconds. ie, CS will elect a new leader node(master)if primary is not reachable for 30 seconds.
 
 Complete list of parameters and files used in this setup are as follows.</br>
 pgvm1: [/etc/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm1/patroni.yml)</br>
@@ -99,7 +99,10 @@ pgvm2: [/etc/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/con
 pgvm3: [/etc/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm3/patroni.yml)</br>
 
 Start patroni when the parameters are ready. Patroni will create a new PG cluster and the result from <b>pgvm1, pgvm2</b> is follows.
+
 `postgres@pgvm1:~$patroni /etc/patroni.yml > patronilogs/patroni_member_1.log 2>&1 &` </br>
+
+and
 
 `postgres@pgvm2:~$patroni /etc/patroni.yml > patronilogs/patroni_member_1.log 2>&1 &` </br>
 
