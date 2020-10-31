@@ -1,10 +1,9 @@
 #!/bin/bash
 #Description: Setup Environment
-#Install PostgreSQL12, Patroni, pgbackrest
+#Install PostgreSQL12, Patroni
 # 1. System update
 # 2. Install PostgreSQL 12
-# 3.Install Patroni
-# 4. Install pgbackrest
+
 
 #set -x
 
@@ -33,29 +32,3 @@ sleep 2
 systemctl stop postgresql
 echo "Finished stopping PG instance"
 sleep 1
-
-echo "Installing & Confifuring Patroni dependencies"
-sleep 2
-sudo ln -s /usr/lib/postgresql/12/bin/* /usr/sbin/
-apt -y install python python-pip jq
-pip install --upgrade setuptools
-pip install psycopg2-binary
-apt -y install python-psycopg2
-apt -y install python3-psycopg2
-echo "Completed installing Patroni dependencies"
-sleep 1
-
-echo "Installing Patroni"
-sleep 2
-#pip install patroni[dependencies]
-pip install patroni[etcd]
-echo "Completed installing Patroni"
-sleep 1
-
-echo "Installing pgbackrest"
-sleep 2
-apt -y install perl libtime-hires-perl libdigest-sha-perl libjson-pp-perl
-apt-get install -y pgbackrest
-echo "Completed installing pgbackrest"
-sleep 1
-
