@@ -13,8 +13,8 @@ This document will walk through the steps to perform PostgreSQL HA setup (1 mast
 
 #### VMs setup
 Linux environment details.
-`root@pgvm1:~# lsb_release -a</br>
-No LSB modules are available.`
+`root@pgvm1:~# lsb_release -a`</br>
+`No LSB modules are available.`
 `Distributor ID: Ubuntu`
 `Description:    Ubuntu 18.04.5 LTS`
 `Release:        18.04`
