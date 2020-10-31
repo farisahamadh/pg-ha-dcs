@@ -11,7 +11,7 @@ This document will walk through the steps to perform PostgreSQL HA setup (1 mast
 |pgvm5 |	HAProxy	| 50.51.52.85| Single endpoint for connecting to the cluster's leader |
 |pgvm6 |	pgbackrest repository	| 50.51.52.86| Backup repository server |
 
-#### VMs setup
+### VMs setup
 OS release version of all the Linux VMs used for this setup.</br>
 `root@pgvm1:~# lsb_release -a`</br>
 `No LSB modules are available.`</br>
@@ -35,7 +35,8 @@ Execute following scripts to install the required packages.
 4. Install pgbackrest on pgvm1,pgvm2,pgvm3,pgvm6 by executing the following script.
 [setup/install_pgbackrest.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_pgbackrest.sh)</br>
 
-#### Configuration
+### Configuration
+###### etcd
 etcd is an open source distributed key-value store used to hold and manage the critical information that distributed systems need to keep running. Patroni makes use of  etcd to keep the Postgres cluster up and running.
 
 On pgvm4, Update etcd configuration  [/etc/default/etcd](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm4/etcd) with following values.
@@ -60,17 +61,27 @@ Check the status of of etcd with following commands.
 ` Main PID: 1582 (etcd)`</br>
 `    Tasks: 11 (limit: 4632)`</br>
 `   CGroup: /system.slice/etcd.service`</br>
-`           └─1582 /usr/bin/etcd`</br></br>
+`           └─1582 /usr/bin/etcd`</br>
 
 `root@pgvm4:~# etcdctl cluster-health`</br>
 `member 8e9e05c52164694d is healthy: got healthy result from http://50.51.52.84:2379`</br>
-`cluster is healthy` </br></br>
+`cluster is healthy` </br>
 
 `root@pgvm4:~# etcdctl member list`</br>
 `8e9e05c52164694d: name=pgvm4 peerURLs=http://localhost:2380 clientURLs=http://50.51.52.84:2379 isLeader=true`</br>
 
 
+###### Patroni and Potgresql
 
+Create Patroni configuration files for pgvm1,pgvm2 and pgvm3 and ensure following configuration parameters are refering the correct server. 
+For example,
+
+`name: <span style="color:red> pgvm1 </span>`</br>
+restapi:
+    listen: <span style="color:red>50.51.52.81:8008 </span>
+    connect_address: <span style="color:red>50.51.52.81:8008 </span>
+
+<span style="color:red> </span>
 
 
 
