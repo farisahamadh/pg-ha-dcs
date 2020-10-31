@@ -82,9 +82,9 @@ For example,
 >   connect_address: <b>50.51.52.81:8008</b> </br>
 >etcd:
 >    host: <b>50.51.52.84:2379</b>
->  - host replication replicator <b>50.51.52.81/0 md5</b> </br>
->  - host replication replicator <b>50.51.52.82/0 md5</b> </br>
->  - host replication replicator <b>50.51.52.83/0 md5</b> </br>
+>  -- host replication replicator <b>50.51.52.81/0 md5</b> </br>
+>  -- host replication replicator <b>50.51.52.82/0 md5</b> </br>
+>  -- host replication replicator <b>50.51.52.83/0 md5</b> </br>
 >  postgresql:
 >  listen: <b>50.51.52.81:5432</b> </br>
 >  connect_address: <b>50.51.52.81:5432</b> </br>
