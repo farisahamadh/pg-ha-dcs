@@ -185,7 +185,12 @@ Install pgbackrest using the supplied script [setup/install_pgbackrest.sh](https
 
 Exchange ssh keys to allow password-less login between all 4 hosts. 
 
-Create configuration directories required for pgbackrest on VMs pgvm1, pgvm2 and pgvm3 using the script [setup/create_pgbackrest_dire.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/create_pgbackrest_dirs.sh)
+Create configuration directories required for pgbackrest on VMs pgvm1, pgvm2 and pgvm3 using the script [setup/create_pgbackrest_dirs.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/create_pgbackrest_dirs.sh)
+
+On the backup repository server, create pgbackrest configuration file at /etc/pgbackrest/pgbackrest.conf using the script [config/pgvm6/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm6). Make sure that the repository location defined in repo1-path is created and have right permission.
+
+This config file defines all 3  postgres instances are locations, how it is archived, and how it is backed up. It is known as a <b>stanza</b>. In this example "main" is defined as stanza name in the config file.
+
 
 
 
