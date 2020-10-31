@@ -136,6 +136,29 @@ When developing an application that uses a database, it can be cumbersome to kee
 HAProxy forwards the connection to whichever node is currently the master. It does this using a REST endpoint that Patroni provides. Patroni ensures that, at any given time, only the master Postgres node will appear as online, forcing HAProxy to connect to the correct node.
 
 Install HAProxy on pgvm5 using the script [setup/install_HA.sh](https://github.com/farisahamadh/pgsql-ha/tree/main/setup) 
+Configure HAProxy parameter file with the values located at [/etc/haproxy/haproxy.cfg](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm5/haproxy.cfg)
+Start HAProxy:
+> root@pgvm5:~# systemctl start haproxy
+> root@pgvm5:~# systemctl status haproxy
+> ● haproxy.service - HAProxy Load Balancer
+>    Loaded: loaded (/lib/systemd/system/haproxy.service; enabled; vendor preset: enabled)
+>    Active: active (running) since Sat 2020-10-31 11:53:15 UTC; 3s ago
+>      Docs: man:haproxy(1)
+>            file:/usr/share/doc/haproxy/configuration.txt.gz
+>   Process: 2988 ExecStartPre=/usr/sbin/haproxy -f $CONFIG -c -q $EXTRAOPTS (code=exited, status=0/SUCCESS)
+ > Main PID: 2998 (haproxy)
+>     Tasks: 2 (limit: 4632)
+>    CGroup: /system.slice/haproxy.service
+>            ├─2998 /usr/sbin/haproxy -Ws -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid
+>            └─3000 /usr/sbin/haproxy -Ws -f /etc/haproxy/haproxy.cfg -p /run/haproxy.pid
+> 
+> Oct 31 11:53:15 pgvm5 systemd[1]: Starting HAProxy Load Balancer...
+> Oct 31 11:53:15 pgvm5 haproxy[2998]: Proxy stats started.
+> Oct 31 11:53:15 pgvm5 haproxy[2998]: Proxy stats started.
+> Oct 31 11:53:15 pgvm5 haproxy[2998]: Proxy postgres started.
+> Oct 31 11:53:15 pgvm5 haproxy[2998]: Proxy postgres started.
+> Oct 31 11:53:15 pgvm5 systemd[1]: Started HAProxy Load Balancer.
+
 
 
 
