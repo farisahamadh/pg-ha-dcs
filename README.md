@@ -270,6 +270,10 @@ postgres@pgvm6:~$</pre></br>
 
 
 
+##### Bootstrapping of a new cluster
+
+##### Monitoring
+
 
 
 
