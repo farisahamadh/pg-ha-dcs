@@ -183,7 +183,11 @@ Identifying and connecting to primary for backing up database is the biggest cha
 
 Install pgbackrest using the supplied script [setup/install_pgbackrest.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_pgbackrest.sh) on VMs pgvm1, pgvm2, pgvm3 and dedicated backup repository server pgvm6.
 
-Exchange ssh keys to allow password-less login between all 3 hosts. 
+Exchange ssh keys to allow password-less login between all 4 hosts. 
+
+Create configuration directories required for pgbackrest on VMs pgvm1, pgvm2 and pgvm3 using the script [setup/create_pgbackrest_dire.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/create_pgbackrest_dirs.sh)
+
+
 
 
 
