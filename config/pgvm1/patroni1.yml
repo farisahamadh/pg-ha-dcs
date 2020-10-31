@@ -1,0 +1,70 @@
+scope: postgres
+namespace: /pg_cluster/
+name: pgvm1
+
+restapi:
+    listen: 50.51.52.81:8008
+    connect_address: 50.51.52.81:8008
+
+etcd:
+    host: 50.51.52.84:2379
+
+bootstrap:
+    dcs:
+        ttl: 30
+        loop_wait: 10
+        retry_timeout: 10
+        maximum_lag_on_failover: 1048576
+        postgresql:
+            use_pg_rewind: true
+            use_slots: true
+            parameters:
+              hot_standby: "on"
+              wal_keep_segments: 20
+              max_wal_senders: 8
+              max_replication_slots: 8
+
+    initdb:
+    - encoding: UTF8
+    - data-checksums
+
+    pg_hba:
+    - host replication replicator 127.0.0.1/32 md5
+    - host replication replicator 50.51.52.81/0 md5
+    - host replication replicator 50.51.52.82/0 md5
+    - host replication replicator 50.51.52.83/0 md5
+    - host all all 0.0.0.0/0 md5
+
+    users:
+        admin:
+            password: admin
+            options:
+                - createrole
+                - createdb
+
+postgresql:
+    listen: "0.0.0.0:5432"
+    connect_address: 50.51.52.81:5432
+    data_dir: /var/lib/postgresql/data
+    pgpass: /tmp/pgpass
+    authentication:
+        replication:
+            username: replicator
+            password: reppassword
+        superuser:
+            username: postgres
+            password: secretpassword
+        rewind:
+          username: rewind_user
+          password: rewind_password
+        parameters:
+          archive_mode: "on"
+          archive_command: 'pgbackrest --stanza=main archive-push %p'
+          unix_socket_directories: '.'
+
+tags:
+    nofailover: false
+    noloadbalance: false
+    clonefrom: false
+    nosync: false
+
