@@ -90,6 +90,7 @@ For example,
 >  connect_address: <b>50.51.52.81:5432</b> </br>
 
 Patroni configuration is stored in the DCS (Distributed Configuration Store), etcd in this case and these options are set in DCS at any time.
+
 Time to Live(ttl) is defined as 30 seconds. ie, if primary is not reachable for 30 seconds DCS will elect a new leader node(master)
 
 Complete list of parameters and files used in this setup are as follows.</br>
