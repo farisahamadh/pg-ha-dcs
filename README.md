@@ -108,8 +108,15 @@ Start patroni when the parameters are ready. Patroni will create a new PG cluste
 `| pgvm2  | 50.51.52.82 | Replica | running |  1 |       0.0 |`</br>
 `+--------+-------------+---------+---------+----+-----------+`</br>
 
+Restart pgvm1 and start patroni. Patroni will to the failover with the help of etcd. Notice that the timeline(TL) is incremented by 1 due to failover.
 
-
+`postgres@pgvm2:~$ patronictl -c /etc/patroni.yml list`</br>
+`+ Cluster: postgres (6889331455358453954) -+----+-----------+`</br>
+`| Member | Host        | Role    | State   | TL | Lag in MB |`</br>
+`+--------+-------------+---------+---------+----+-----------+`</br>
+`| pgvm1  | 50.51.52.81 | Replica  | running |  2 |           |`</br>
+`| pgvm2  | 50.51.52.82 | Leader   | running |  2 |       0.0 |`</br>
+`+--------+-------------+---------+---------+----+-----------+`</br>
 
 
 
