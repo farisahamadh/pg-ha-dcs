@@ -89,7 +89,7 @@ For example,
 >  listen: <b>50.51.52.81:5432</b> </br>
 >  connect_address: <b>50.51.52.81:5432</b> </br>
 
-Files used in this setup are as follows.</br>
+Complete list of parameters and files used in this setup are as follows.</br>
 pgvm1: [/etc/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm1/patroni.yml)</br>
 pgvm2: [/etc/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm2/patroni.yml)</br>
 pgvm3: [/etc/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm3/patroni.yml)</br>
