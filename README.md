@@ -12,13 +12,13 @@ This document will walk through the steps to perform PostgreSQL HA setup (1 mast
 |pgvm6 |	pgbackrest repository	| 50.51.52.86| Backup repository server |
 
 #### VMs setup
-Linux environment details.
+Linux environment details.</br>
 `root@pgvm1:~# lsb_release -a`</br>
-`No LSB modules are available.`
-`Distributor ID: Ubuntu`
-`Description:    Ubuntu 18.04.5 LTS`
-`Release:        18.04`
-`Codename:       bionic`
+`No LSB modules are available.`</br>
+`Distributor ID: Ubuntu`</br>
+`Description:    Ubuntu 18.04.5 LTS`</br>
+`Release:        18.04`</br>
+`Codename:       bionic`</br></br>
 
 
 
