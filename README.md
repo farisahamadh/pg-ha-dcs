@@ -38,7 +38,7 @@ Execute following scripts to install the required packages.
 #### Configuration
 etcd is an open source distributed key-value store used to hold and manage the critical information that distributed systems need to keep running. Patroni makes use of  etcd to keep the Postgres cluster up and running.
 
-On pgvm4, Update etcd configuration  [/etc/default/etcd](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm4) with following values.
+On pgvm4, Update etcd configuration  [/etc/default/etcd](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm4/etcd) with following values.
 `ETCD_LISTEN_PEER_URLS="http://50.51.52.84:2380"`</br>
 `ETCD_LISTEN_CLIENT_URLS="http://localhost:2379,http://50.51.52.84:2379"`</br>
 `ETCD_INITIAL_ADVERTISE_PEER_URLS="http://50.51.52.84:2380"`</br>
@@ -60,11 +60,11 @@ Check the status of of etcd with following commands.
 ` Main PID: 1582 (etcd)`</br>
 `    Tasks: 11 (limit: 4632)`</br>
 `   CGroup: /system.slice/etcd.service`</br>
-`           └─1582 /usr/bin/etcd`</br>`</br>
+`           └─1582 /usr/bin/etcd`</br></br>
 
 `root@pgvm4:~# etcdctl cluster-health`</br>
 `member 8e9e05c52164694d is healthy: got healthy result from http://50.51.52.84:2379`</br>
-`cluster is healthy`</br>`</br>
+`cluster is healthy` </br></br>
 
 `root@pgvm4:~# etcdctl member list`</br>
 `8e9e05c52164694d: name=pgvm4 peerURLs=http://localhost:2380 clientURLs=http://50.51.52.84:2379 isLeader=true`</br>
