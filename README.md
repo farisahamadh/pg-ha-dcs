@@ -78,8 +78,23 @@ For example,
 
 > name:<b>pgvm1</b></br>
 >restapi:</br>
->    \tlisten: <b>50.51.52.81:8008</b> </br>
->    \tconnect_address: <b>50.51.52.81:8008</b> </br>
+>   listen: <b>50.51.52.81:8008</b> </br>
+>   connect_address: <b>50.51.52.81:8008</b> </br>
+>etcd:
+>    host: <b>50.51.52.84:2379</b>
+  - host replication replicator <b>50.51.52.81/0 md5</b> </br>
+  - host replication replicator <b>50.51.52.82/0 md5</b> </br>
+  - host replication replicator <b>50.51.52.83/0 md5</b> </br>
+>  postgresql:
+>  listen: <b>50.51.52.81:5432</b> </br>
+>  connect_address: <b>50.51.52.81:5432</b> </br>
+
+Files used in this setup are as follows.
+pgvm1: [/etc/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm1/patroni.yml)
+pgvm2: [/etc/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm2/patroni.yml)
+pgvm3: [/etc/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm3/patroni.yml)
+
+
 
 
 
