@@ -1,5 +1,5 @@
 # Postgres HA setup with Patroni
-This document will explain the steps to PostgreSQL HA setup (1 master and 2 standbys) with Patroni. 
+This document will walk through the steps to perform PostgreSQL HA setup (1 master and 2 standbys) with Patroni. 
 
 ### Environment details - 6 Linux VMs of following
 |VM Name |	Purpose	| IP address| Description |
