@@ -217,6 +217,16 @@ When all the configurations are set, it is time to create the <b>stanza</b> "mai
 `2020-10-31 09:06:28.377 P00   INFO: stanza-create command begin 2.30: --log-level-console=info --pg1-host=50.51.52.81 --pg2-host=50.51.52.82 --pg3-host=50.51.52.83 --pg1-path=/var/lib/postgresql/data --pg2-path=/var/lib/postgresql/data --pg3-path=/var/lib/postgresql/data --pg1-port=5432 --pg2-port=5432 --pg3-port=5432 --pg1-socket-path=/var/run/postgresql --pg2-socket-path=/var/run/postgresql --pg3-socket-path=/var/run/postgresql --repo1-path=/var/lib/pgbackrest --stanza=main
 2020-10-31 09:06:33.044 P00   INFO: stanza-create command end: completed successfully (4668ms)`</br>
 
+Check pgbackrest configuration on all 3 Postgres nodes.
+
+<b>pgvm1</b></br>
+`postgres@pgvm1:~$ pgbackrest --stanza=main --log-level-console=info check`</br>
+`2020-10-31 09:09:12.636 P00   INFO: check command begin 2.30: --log-level-console=info --log-level-file=detail --pg1-path=/var/lib/postgresql/data --pg1-port=5432 --pg1-socket-path=/var/run/postgresql --repo1-host=50.51.52.86 --repo1-host-user=postgres --stanza=main`</br>
+`2020-10-31 09:09:15.579 P00   INFO: WAL segment 000000130000000000000012 successfully archived to '/var/lib/pgbackrest/archive/main/12-1/0000001300000000/000000130000000000000012-a46534b247e80690628412fec6db0c443cbabea2.gz`</br>
+`2020-10-31 09:09:15.681 P00   INFO: check command end: completed successfully (3046ms)`</br>
+
+<b>pgvm2</b></br>
+<b>pgvm3</b></br>
 
 
 
