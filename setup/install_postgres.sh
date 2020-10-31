@@ -10,7 +10,7 @@
 echo "System update"
 sleep 2
 apt update
-apt-get upgrade -y
+apt-get upgrade -y 
 echo "Completed system update"
 sleep 1
 
