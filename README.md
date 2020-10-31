@@ -95,7 +95,6 @@ pgvm2: [/etc/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/con
 pgvm3: [/etc/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm3/patroni.yml)</br>
 
 Start patroni when the parameters are ready. Patroni will create a new PG cluster and the result from <b>pgvm1, pgvm2</b> is follows.
-
 `postgres@pgvm1:~$patroni /etc/patroni.yml > patronilogs/patroni_member_1.log 2>&1 &` </br>
 
 `postgres@pgvm2:~$patroni /etc/patroni.yml > patronilogs/patroni_member_1.log 2>&1 &` </br>
@@ -108,7 +107,7 @@ Start patroni when the parameters are ready. Patroni will create a new PG cluste
 `| pgvm2  | 50.51.52.82 | Replica | running |  1 |       0.0 |`</br>
 `+--------+-------------+---------+---------+----+-----------+`</br>
 
-Restart pgvm1 and start patroni. Patroni will to the failover with the help of etcd. Notice that the timeline(TL) is incremented by 1 due to failover.
+Restart pgvm1 and start patroni. Patroni will do the failover with the help of etcd. Notice that the timeline(TL) is incremented by 1 due to failover.
 
 `postgres@pgvm2:~$ patronictl -c /etc/patroni.yml list`</br>
 `+ Cluster: postgres (6889331455358453954) -+----+-----------+`</br>
@@ -116,6 +115,18 @@ Restart pgvm1 and start patroni. Patroni will to the failover with the help of e
 `+--------+-------------+---------+---------+----+-----------+`</br>
 `| pgvm1  | 50.51.52.81 | Replica  | running |  2 |           |`</br>
 `| pgvm2  | 50.51.52.82 | Leader   | running |  2 |       0.0 |`</br>
+`+--------+-------------+---------+---------+----+-----------+`</br>
+
+After adding  second standby,
+`postgres@pgvm3:~$patroni /etc/patroni.yml > patronilogs/patroni_member_1.log 2>&1 &`
+
+`postgres@pgvm2:~$ patronictl -c /etc/patroni.yml list`</br>
+`+ Cluster: postgres (6889331455358453954) -+----+-----------+`</br>
+`| Member | Host        | Role    | State   | TL | Lag in MB |`</br>
+`+--------+-------------+---------+---------+----+-----------+`</br>
+`| pgvm1  | 50.51.52.81 | Replica | running |  3 |       0.0 |`</br>
+`| pgvm2  | 50.51.52.82 | Leader  | running |  3 |           |`</br>
+`| pgvm3  | 50.51.52.83 | Replica | running |  3 |       0.0 |`</br>
 `+--------+-------------+---------+---------+----+-----------+`</br>
 
 
