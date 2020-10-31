@@ -189,9 +189,9 @@ Create configuration directories required for pgbackrest on VMs pgvm1, pgvm2 and
 
 On each postgres host (pgvm1, pgvm2 and pgvm3), create the pgbackrest.conf to point to repository server using the following files.
 
-pgvm1: /etc/pgbackrest/pgbackrest.conf at [config/pgvm1/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm1/pgbackrest.conf)</br>
-pgvm2: /etc/pgbackrest/pgbackrest.conf at [config/pgvm2/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm2/pgbackrest.conf)</br>
-pgvm2: /etc/pgbackrest/pgbackrest.conf at [config/pgvm2/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm3/pgbackrest.conf)</br>
+pgvm1: /etc/pgbackrest/pgbackrest.conf using [config/pgvm1/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm1/pgbackrest.conf)</br>
+pgvm2: /etc/pgbackrest/pgbackrest.conf using [config/pgvm2/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm2/pgbackrest.conf)</br>
+pgvm2: /etc/pgbackrest/pgbackrest.conf using [config/pgvm2/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm3/pgbackrest.conf)</br>
 
 Modify patroni YAML configuration file to set archive locations to pgbackrest. Make sure following changes are made in YAML files.
 
@@ -201,10 +201,10 @@ Modify patroni YAML configuration file to set archive locations to pgbackrest. M
 >    archive_mode: "on"</br>
 >    archive_command: 'pgbackrest --stanza=main archive-push %p'</br>
 
-Restart Patroni and PG cluster using the modified YAML files available at,
-pgvm1: [/etc/patroni1.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm1/patroni1.yml)
-pgvm2: [/etc/patroni1.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm2/patroni1.yml)
-pgvm3: [/etc/patroni1.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm3/patroni1.yml)
+Restart Patroni and PG cluster using the modified YAML files available at,</br>
+pgvm1: [/etc/patroni1.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm1/patroni1.yml)</br>
+pgvm2: [/etc/patroni1.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm2/patroni1.yml)</br>
+pgvm3: [/etc/patroni1.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm3/patroni1.yml)</br>
 
 
 On the backup repository server, create pgbackrest configuration file at /etc/pgbackrest/pgbackrest.conf using the script [config/pgvm6/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm6). Make sure that the repository location defined in repo1-path is created and have right permission.
