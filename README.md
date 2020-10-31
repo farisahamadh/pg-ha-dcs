@@ -178,7 +178,12 @@ Test connectivity via HAProxy
 `You are connected to database "postgres" as user "postgres" on host "50.51.52.85" at port "5000".`</br>
 `postgres=#`</br>
 
+##### Backup
+Identifying and connecting to primary for backing up database is the biggest challenge in a replicated enviroment. PgBackrest will automatically determine which postgres instance is primary and will take the backup accordingly from there.
 
+Install pgbackrest using the supplied script [setup/install_pgbackrest.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_pgbackrest.sh) on VMs pgvm1, pgvm2, pgvm3 and dedicated backup repository server pgvm6.
+
+Exchange ssh keys to allow password-less login between all 3 hosts. 
 
 
 
