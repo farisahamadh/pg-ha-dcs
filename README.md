@@ -117,7 +117,8 @@ Restart pgvm1 and start patroni. Patroni will do the failover with the help of e
 `| pgvm2  | 50.51.52.82 | Leader   | running |  2 |       0.0 |`</br>
 `+--------+-------------+---------+---------+----+-----------+`</br>
 
-After adding  second standby,
+After adding  second standby.
+
 `postgres@pgvm3:~$patroni /etc/patroni.yml > patronilogs/patroni_member_1.log 2>&1 &`
 
 `postgres@pgvm2:~$ patronictl -c /etc/patroni.yml list`</br>
