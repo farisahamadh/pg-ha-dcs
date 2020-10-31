@@ -222,22 +222,51 @@ Check pgbackrest configuration on all 3 Postgres nodes.
 <b>pgvm1</b></br>
 <pre>postgres@pgvm1:~$ pgbackrest --stanza=main --log-level-console=info check
 2020-10-31 09:09:12.636 P00   INFO: check command begin 2.30: --log-level-console=info --log-level-file=detail --pg1-path=/var/lib/postgresql/data --pg1-port=5432 --pg1-socket-path=/var/run/postgresql --repo1-host=50.51.52.86 --repo1-host-user=postgres --stanza=main
-<b>2020-10-31 09:09:15.579 P00   <b>INFO: WAL segment 000000130000000000000012 successfully archived to '/var/lib/pgbackrest/archive/main/12-1/0000001300000000/000000130000000000000012-a46534b247e80690628412fec6db0c443cbabea2.gz</b>
+2020-10-31 09:09:15.579 P00   <b>INFO: WAL segment 000000130000000000000012 successfully archived to '/var/lib/pgbackrest/archive/main/12-1/0000001300000000/000000130000000000000012-a46534b247e80690628412fec6db0c443cbabea2.gz
 2020-10-31 09:09:15.681 P00   INFO: check command end: completed successfully (3046ms)</pre></br>
 
 <b>pgvm2</b></br>
 <pre>postgres@pgvm2:~$ pgbackrest --stanza=main --log-level-console=info check
 2020-10-31 09:10:15.763 P00   INFO: check command begin 2.30: --log-level-console=info --log-level-file=detail --pg1-path=/var/lib/postgresql/data --pg1-port=5432 --pg1-socket-path=/var/run/postgresql --repo1-host=50.51.52.86 --repo1-host-user=postgres --stanza=main
-<b>2020-10-31 09:10:17.269 P00   INFO: switch wal not performed because this is a standby</b>
+2020-10-31 09:10:17.269 P00   INFO: switch wal not performed because this is a standby
 2020-10-31 09:10:17.370 P00   INFO: check command end: completed successfully (1608ms)</pre></br>
 
 <b>pgvm3</b></br>
 <pre>postgres@pgvm3:~$ pgbackrest --stanza=main --log-level-console=info check
 2020-10-31 05:10:59.648 P00   INFO: check command begin 2.30: --log-level-console=info --log-level-file=detail --pg1-path=/var/lib/postgresql/data --pg1-port=5432 --pg1-socket-path=/var/run/postgresql --repo1-host=50.51.52.86 --repo1-host-user=postgres --stanza=main
-<b>2020-10-31 05:11:01.073 P00   INFO: switch wal not performed because this is a standby</b>
+2020-10-31 05:11:01.073 P00   INFO: switch wal not performed because this is a standby
 2020-10-31 05:11:01.179 P00   INFO: check command end: completed successfully (1532ms)</pre></br>
 
+Note the difference in output. The <b>WAL log</b> will only be archived from the primary.
 
+
+Now, its time to run the first pgbackrest backup. Execute the following command on backup repository server.
+<pre>postgres@pgvm6:~$ pgbackrest --log-level-console=info --stanza=main backup
+2020-10-31 09:12:40.286 P00   INFO: backup command begin 2.30: --log-level-console=info --pg1-host=50.51.52.81 --pg2-host=50.51.52.82 --pg3-host=50.51.52.83 --pg1-path=/var/lib/postgresql/data --pg2-path=/var/lib/postgresql/data --pg3-path=/var/lib/postgresql/data --pg1-port=5432 --pg2-port=5432 --pg3-port=5432 --pg1-socket-path=/var/run/postgresql --pg2-socket-path=/var/run/postgresql --pg3-socket-path=/var/run/postgresql --repo1-path=/var/lib/pgbackrest --repo1-retention-full=2 --stanza=main --start-fast
+WARN: no prior backup exists, incr backup has been changed to full
+2020-10-31 09:12:44.504 P00   INFO: execute non-exclusive pg_start_backup(): backup begins after the requested immediate checkpoint completes
+2020-10-31 09:12:45.019 P00   INFO: backup start archive = 000000130000000000000014, lsn = 0/14000028
+2020-10-31 09:12:47.133 P01   INFO: backup file 50.51.52.81:/var/lib/postgresql/data/base/13398/1255 (632KB, 2%) checksum 1736b758f724711a283690fd11db4dc488629297
+2020-10-31 09:12:47.168 P01   INFO: backup file 50.51.52.81:/var/lib/postgresql/data/base/13397/1255 (632KB, 5%) checksum 4cd8fb7fe980a235613b2d1a8b8fbc5abe7fa96b
+2020-10-31 09:12:47.202 P01   INFO: backup file 50.51.52.81:/var/lib/postgresql/data/base/1/1255 (632KB, 7%) checksum 4cd8fb7fe98
+.
+.
+.
+.
+.
+lines truncated
+.
+.
+2020-10-31 09:12:57.917 P01   INFO: backup file 50.51.52.81:/var/lib/postgresql/data/base/1/13235 (0B, 100%)
+2020-10-31 09:12:57.921 P00   INFO: full backup size = 23.5MB
+2020-10-31 09:12:57.921 P00   INFO: execute non-exclusive pg_stop_backup() and wait for all WAL segments to archive
+2020-10-31 09:12:58.131 P00   INFO: backup stop archive = 000000130000000000000014, lsn = 0/14000138
+2020-10-31 09:12:58.133 P00   INFO: check archive for segment(s) 000000130000000000000014:000000130000000000000014
+2020-10-31 09:12:59.480 P00   INFO: new backup label = 20201031-091244F
+2020-10-31 09:12:59.545 P00   INFO: backup command end: completed successfully (19260ms)
+2020-10-31 09:12:59.546 P00   INFO: expire command begin 2.30: --log-level-console=info --pg1-host=50.51.52.81 --pg2-host=50.51.52.82 --pg3-host=50.51.52.83 --repo1-path=/var/lib/pgbackrest --repo1-retention-full=2 --stanza=main
+2020-10-31 09:12:59.767 P00   INFO: expire command end: completed successfully (222ms)
+postgres@pgvm6:~$</pre></br>
 
 
 
