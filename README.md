@@ -311,6 +311,35 @@ lines truncated
 2020-11-01 04:43:37.777 P00   INFO: restore command end: completed successfully (10263ms)
 </pre>
 
+At the end of the backup, a recovery.conf file is created in the data directory
+
+`postgres@pgvm7:~$ pcat recovery.conf`</br>
+`restore_command = '/usr/bin/pgbackrest --log-level-console=info --stanza=main archive-get %f "%p"'`</br>
+
+Start Postgresql cluster normally.
+<pre>
+postgres@pgvm7:~/data$ pg_ctl -D /var/lib/postgresql/data start
+waiting for server to start....2020-11-01 04:52:15.339 UTC [4748] LOG:  starting PostgreSQL 12.4 (Ubuntu 12.4-1.pgdg18.04+1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0, 64-bit
+2020-11-01 04:52:15.340 UTC [4748] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2020-11-01 04:52:15.348 UTC [4748] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2020-11-01 04:52:15.379 UTC [4749] LOG:  database system was interrupted; last known up at 2020-10-31 09:12:44 UTC
+.2020-11-01 04:52:16.394 UTC [4749] LOG:  restored log file "00000014.history" from archive
+.2020-11-01 04:52:17.476 UTC [4749] LOG:  restored log file "00000015.history" from archive
+.
+.
+.
+lines truncated
+.
+.
+2020-11-01 04:52:26.077 UTC [4749] LOG:  restored log file "000000140000000000000017" from archive
+2020-11-01 04:52:27.170 UTC [4749] LOG:  restored log file "000000140000000000000018" from archive
+2020-11-01 04:52:29.181 UTC [4749] LOG:  redo done at 0/180001C0
+2020-11-01 04:52:30.469 UTC [4749] LOG:  restored log file "000000140000000000000018" from archive
+2020-11-01 04:52:31.522 UTC [4749] LOG:  selected new timeline ID: 22
+2020-11-01 04:52:31.592 UTC [4749] LOG:  archive recovery complete
+2020-11-01 04:52:32.584 UTC [4749] LOG:  restored log file "00000015.history" from archive
+2020-11-01 04:52:32.638 UTC [4748] LOG:  database system is ready to accept connections
+</pre>
 
 
 ##### Monitoring
