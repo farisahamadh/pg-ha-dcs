@@ -363,6 +363,45 @@ postgres@pgvm1:~$ curl -s -o /dev/null -w "%{http_code}" http://50.51.52.81:8008
 postgres@pgvm1:~$
 </pre></br>
 
+The following request returns Patroni cluster information in a JSON document 
+<pre>
+postgres@pgvm1:~$ curl -s http://50.51.52.81:8008/patroni | jq
+{
+  "database_system_identifier": "6889331455358453954",
+  "postmaster_start_time": "2020-11-01 07:04:12.573 UTC",
+  "timeline": 22,
+  "cluster_unlocked": false,
+  "patroni": {
+    "scope": "postgres",
+    "version": "2.0.1"
+  },
+  "replication": [
+    {
+      "sync_state": "async",
+      "sync_priority": 0,
+      "client_addr": "50.51.52.82",
+      "state": "streaming",
+      "application_name": "pgvm2",
+      "usename": "replicator"
+    },
+    {
+      "sync_state": "async",
+      "sync_priority": 0,
+      "client_addr": "50.51.52.83",
+      "state": "streaming",
+      "application_name": "pgvm3",
+      "usename": "replicator"
+    }
+  ],
+  "state": "running",
+  "role": "master",
+  "xlog": {
+    "location": 436208232
+  },
+  "server_version": 120004
+}
+</pre>
+
 
 
 
