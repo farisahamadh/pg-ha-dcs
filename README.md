@@ -353,6 +353,15 @@ pgvm8 pgbackrest.conf using [config/pgvm8/pgbackrest1.conf](https://github.com/f
 
 ##### Monitoring
 
+Patroni provides rich REST API which used by itself and could be used for monitoring.
+
+The following requests to Patroni REST API will return HTTP status code 200 only when the Patroni node is running as the leader.
+
+<pre>
+postgres@pgvm1:~$ curl -s -o /dev/null -w "%{http_code}" http://50.51.52.81:8008/leader
+200
+postgres@pgvm1:~$
+</pre></br>
 
 
 
