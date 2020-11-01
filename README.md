@@ -41,7 +41,7 @@ Execute following scripts to install the required packages.
 ##### etcd
 etcd is an open source distributed key-value store used to hold and manage the critical information that distributed systems need to keep running. Patroni makes use of  etcd to keep the Postgres cluster up and running.
 
-On pgvm4, update etcd configuration  [/etc/default/etcd](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm4/etcd) with following values.
+On pgvm4, update etcd configuration  /etc/default/etcd using [config/pgvm4/etcd](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm4/etcd) with following values.
 
 `ETCD_LISTEN_PEER_URLS="http://50.51.52.84:2380"`</br>
 `ETCD_LISTEN_CLIENT_URLS="http://localhost:2379,http://50.51.52.84:2379"`</br>
@@ -56,6 +56,7 @@ Save and close the file when fiinished and start etcd with the below command.
 `systemctl start etcd`</br>
 
 Check the status of of etcd with following commands.
+
 `root@pgvm4:~# systemctl status etcd`</br>
 `● etcd.service - etcd - highly-available key value store`</br>
 `   Loaded: loaded (/lib/systemd/system/etcd.service; disabled; vendor preset: enabled)`</br>
@@ -148,7 +149,7 @@ HAProxy forwards the connection to whichever node is currently the master. It do
 
 Install HAProxy on pgvm5 using the script [setup/install_HA.sh](https://github.com/farisahamadh/pgsql-ha/tree/main/setup) 
 
-Configure HAProxy parameter file with the values located at [/etc/haproxy/haproxy.cfg](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm5/haproxy.cfg)
+Configure HAProxy parameter file `/etc/haproxy/haproxy.cfg` using [config/pgvm5/haproxy.cfg](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm5/haproxy.cfg)
 
 Start HAProxy:
 `root@pgvm5:# systemctl start haproxy`</br>
