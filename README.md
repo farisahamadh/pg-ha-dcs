@@ -394,6 +394,139 @@ postgres@pgvm1:~$ curl -s http://50.51.52.81:8008/cluster | jq
 }
 </pre>
 
+The following endpoint provides a view on the history of cluster switchovers/failovers in JSON format.
+
+<pre>
+postgres@pgvm1:~$ curl -s http://50.51.52.81:8008/history | jq
+[
+  [
+    1,
+    50332096,
+    "no recovery target specified",
+    "2020-10-30T09:05:41.166769+00:00"
+  ],
+  [
+    2,
+    50332552,
+    "no recovery target specified",
+    "2020-10-30T09:07:12.487032+00:00"
+  ],
+  [
+    3,
+    83886408,
+    "no recovery target specified",
+    "2020-10-30T13:28:55.747393+00:00"
+  ],
+  [
+    4,
+    134217888,
+    "no recovery target specified",
+    "2020-10-30T16:13:41.168031+00:00"
+  ],
+  [
+    5,
+    150995104,
+    "no recovery target specified",
+    "2020-10-30T16:14:56.656419+00:00"
+  ],
+  [
+    6,
+    150995560,
+    "no recovery target specified",
+    "2020-10-30T12:52:48.046252-04:00"
+  ],
+  [
+    7,
+    151109328,
+    "no recovery target specified",
+    "2020-10-30T17:41:04.934438+00:00"
+  ],
+  [
+    8,
+    151109928,
+    "no recovery target specified",
+    "2020-10-31T04:50:10.047930+00:00"
+  ],
+  [
+    9,
+    151262336,
+    "no recovery target specified",
+    "2020-10-31T05:02:51.719451+00:00"
+  ],
+  [
+    10,
+    167772320,
+    "no recovery target specified",
+    "2020-10-31T05:05:12.655485+00:00"
+  ],
+  [
+    11,
+    184549536,
+    "no recovery target specified",
+    "2020-10-31T05:08:32.326211+00:00"
+  ],
+  [
+    12,
+    201326752,
+    "no recovery target specified",
+    "2020-10-31T05:37:02.288246+00:00"
+  ],
+  [
+    13,
+    218103968,
+    "no recovery target specified",
+    "2020-10-31T05:38:07.271077+00:00"
+  ],
+  [
+    14,
+    234881184,
+    "no recovery target specified",
+    "2020-10-31T06:06:54.439324+00:00"
+  ],
+  [
+    15,
+    251658400,
+    "no recovery target specified",
+    "2020-10-31T06:23:06.028333+00:00"
+  ],
+  [
+    16,
+    268435616,
+    "no recovery target specified",
+    "2020-10-31T06:29:49.168144+00:00"
+  ],
+  [
+    17,
+    285212832,
+    "no recovery target specified",
+    "2020-10-31T06:41:46.008429+00:00"
+  ],
+  [
+    18,
+    301990048,
+    "no recovery target specified",
+    "2020-10-31T06:48:16.926262+00:00"
+  ],
+  [
+    19,
+    369098912,
+    "no recovery target specified",
+    "2020-11-01T03:00:29.684259+00:00"
+  ],
+  [
+    20,
+    419430560,
+    "no recovery target specified",
+    "2020-11-01T04:17:33.419808+00:00"
+  ],
+  [
+    21,
+    436207776,
+    "no recovery target specified",
+    "2020-11-01T07:04:13.848507+00:00"
+  ]
+]
+</pre>
 
 
 
