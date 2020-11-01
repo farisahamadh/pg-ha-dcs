@@ -352,7 +352,7 @@ pgvm8 pgbackrest.conf using [config/pgvm8/pgbackrest1.conf](https://github.com/f
 
 ##### Monitoring
 
-Patroni provides rich REST API which used by itself and could be used for monitoring.
+Patroni provides rich REST API which is used by itself and could be used for monitoring.
 
 The following requests to Patroni REST API will return HTTP status code 200 only when the Patroni node is running as the leader.
 
