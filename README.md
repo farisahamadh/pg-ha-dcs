@@ -42,6 +42,7 @@ Execute following scripts to install the required packages.
 etcd is an open source distributed key-value store used to hold and manage the critical information that distributed systems need to keep running. Patroni makes use of  etcd to keep the Postgres cluster up and running.
 
 On pgvm4, update etcd configuration  [/etc/default/etcd](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm4/etcd) with following values.
+
 `ETCD_LISTEN_PEER_URLS="http://50.51.52.84:2380"`</br>
 `ETCD_LISTEN_CLIENT_URLS="http://localhost:2379,http://50.51.52.84:2379"`</br>
 `ETCD_INITIAL_ADVERTISE_PEER_URLS="http://50.51.52.84:2380"`</br>
@@ -51,6 +52,7 @@ On pgvm4, update etcd configuration  [/etc/default/etcd](https://github.com/fari
 `ETCD_ADVERTISE_CLIENT_URLS="http://50.51.52.84:2379"`</br>
 
 Save and close the file when fiinished and start etcd with the below command.
+
 `systemctl start etcd`</br>
 
 Check the status of of etcd with following commands.
@@ -96,9 +98,9 @@ Patroni configuration is stored in the DCS (Distributed Configuration Store), et
 Time to Live(ttl) is defined as 30 seconds. ie, CS will elect a new leader node(master)if primary is not reachable for 30 seconds.
 
 Complete list of parameters and files used in this setup are as follows.</br>
-pgvm1: [/etc/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm1/patroni.yml)</br>
-pgvm2: [/etc/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm2/patroni.yml)</br>
-pgvm3: [/etc/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm3/patroni.yml)</br>
+pgvm1: /etc/patroni.yml using [config/pgvm1/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm1/patroni.yml)</br>
+pgvm2: /etc/patroni.yml using [config/pgvm1/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm2/patroni.yml)</br>
+pgvm3: /etc/patroni.yml using [config/pgvm1/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm3/patroni.yml)</br>
 
 Start patroni when the parameters are ready. Patroni will create a new PG cluster and the result from <b>pgvm1, pgvm2</b> is follows.
 
