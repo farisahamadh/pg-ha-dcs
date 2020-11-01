@@ -285,9 +285,7 @@ Install Postgres 12, Patroni and pgbackrest on VMs pgvm7 & pgvm8 by executing th
 
 Create configuration directories for pgbackrest on VMs pgvm7 and pgvm8 using the script [setup/create_pgbackrest_dirs.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/create_pgbackrest_dirs.sh)
 
-On new host pgvm7, create the pgbackrest.conf to point to stanza <b>main</b> in repository server .
-
-pgvm7: /etc/pgbackrest/pgbackrest.conf using [config/pgvm8/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm7/pgbackrest.conf)</br>
+Setup passwordless ssh authentication between VMs pgvm6,pgvm7 and pgvm8.
 
 Now the new machine pgvm7 is ready for restore and run the following command to start restore.
 
