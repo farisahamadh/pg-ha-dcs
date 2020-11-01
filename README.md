@@ -313,8 +313,8 @@ lines truncated
 At the end of the backup, a recovery signalled during next startup with the following files.
 
 `postgres@pgvm7:~/data$ ls -l postgresql.auto.conf recovery.signal`</br>
-`-rw------- 1 postgres postgres 265 Nov  1 11:12 postgresql.auto.conf`</br>
-`-rw------- 1 postgres postgres   0 Nov  1 11:12 recovery.signal`</br>
+`-rw------- 1 postgres postgres 265 Nov  1 04:43 postgresql.auto.conf`</br>
+`-rw------- 1 postgres postgres   0 Nov  1 04:43 recovery.signal`</br>
 
 Start Postgresql cluster normally.
 <pre>
