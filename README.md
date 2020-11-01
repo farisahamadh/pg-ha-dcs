@@ -24,17 +24,17 @@ OS release version of all the Linux VMs used for this setup.</br>
 
 
 Execute following scripts to install the required packages.
-1. Install Postgres 12, Patroni on VMs pgvm1, pgvm2 & pgvm3 by executing the following scripts.
+1. Install Postgres 12, Patroni on VMs pgvm1, pgvm2 & pgvm3 by executing the following scripts.</br>
 [setup/install_postgres.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_postgres.sh)</br>
 [setup/install_patroni.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_patroni.sh)</br>
 
-2. Install etcd on pgvm4 by executing the following script.
+2. Install etcd on pgvm4 by executing the following script.</br>
 [setup/install_etcd.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_etcd.sh)</br>
 
-3. Install HAProxy on pgvm5 by executing the following script.
+3. Install HAProxy on pgvm5 by executing the following script.</br>
 [setup/install_haproxy.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_HA.sh)</br>
 
-4. Install pgbackrest on pgvm1,pgvm2,pgvm3,pgvm6 by executing the following script.
+4. Install pgbackrest on pgvm1,pgvm2,pgvm3,pgvm6 by executing the following script.</br>
 [setup/install_pgbackrest.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_pgbackrest.sh)</br>
 
 ### Configuration
@@ -212,7 +212,7 @@ pgvm2: /etc/patroni1.yml using [config/pgvm2/patroni1.yml](https://github.com/fa
 pgvm3: /etc/patroni1.yml using [config/pgvm3/patroni1.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm3/patroni1.yml)</br>
 
 
-On the backup repository server, create pgbackrest configuration file at /etc/pgbackrest/pgbackrest.conf using the script [config/pgvm6/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm6). Make sure that the repository location defined in repo1-path is created and have right permission.
+On the backup repository server, create pgbackrest configuration file at `/etc/pgbackrest/pgbackrest.conf` using the script [config/pgvm6/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/tree/main/config/pgvm6). Make sure that the repository location defined in repo1-path is created and have right permission.
 
 This config file defines all 3  postgres instances are locations, how it is archived, and how it is backed up. It is known as a <b>stanza</b>. In this example "main" is defined as stanza name in the config file.
 
@@ -274,8 +274,44 @@ lines truncated
 postgres@pgvm6:~$</pre></br>
 
 
+##### Restore from pgbackrest and bootstrap new patroni cluster
+The following section will explain steps to perform restore on a different machine pgvm7 and setup a replica instance on pgvm8 using patroni.
 
-##### Bootstrapping of a new cluster
+Install Postgres 12, Patroni and pgbackrest on VMs pgvm7 & pgvm8 by executing the following scripts.</br>
+[setup/install_postgres.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_postgres.sh)</br>
+[setup/install_patroni.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_patroni.sh)</br>
+[setup/install_pgbackrest.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/install_pgbackrest.sh)</br>
+
+Create configuration directories for pgbackrest on VMs pgvm7 and pgvm8 using the script [setup/create_pgbackrest_dirs.sh](https://github.com/farisahamadh/pgsql-ha/blob/main/setup/create_pgbackrest_dirs.sh)
+
+On new host pgvm7, create the pgbackrest.conf to point to stanza <b>main</b> in repository server .
+
+pgvm7: /etc/pgbackrest/pgbackrest.conf using [config/pgvm8/pgbackrest.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm7/pgbackrest.conf)</br>
+
+Now the new machine pgvm7 is ready for restore and run the following command to start restore.
+
+<pre>
+postgres@pgvm7:~$ pgbackrest --stanza=main --log-level-console=info restore
+2020-11-01 04:43:27.516 P00   INFO: restore command begin 2.30: --log-level-console=info --log-level-file=off --pg1-path=/var/lib/postgresql/data --repo1-host=50.51.52.86 --repo1-host-user=postgres --stanza=main
+2020-11-01 04:43:28.500 P00   INFO: restore backup set 20201031-091244F
+2020-11-01 04:43:29.482 P01   INFO: restore file /var/lib/postgresql/data/base/13398/1255 (632KB, 2%) checksum 1736b758f724711a283690fd11db4dc488629297
+2020-11-01 04:43:29.503 P01   INFO: restore file /var/lib/postgresql/data/base/13397/1255 (632KB, 5%) checksum 4cd8fb7fe980a235613b2d1a8b8fbc5abe7fa96b
+2020-11-01 04:43:29.522 P01   INFO: restore file /var/lib/postgresql/data/base/1/1255 (632KB, 7%) checksum 4cd8fb7fe980a235613b2d
+.
+.
+.
+.
+lines truncated
+.
+.
+.
+2020-11-01 04:43:37.635 P01   INFO: restore file /var/lib/postgresql/data/base/1/13235 (0B, 100%)
+2020-11-01 04:43:37.664 P00   INFO: write updated /var/lib/postgresql/data/postgresql.auto.conf
+2020-11-01 04:43:37.671 P00   INFO: restore global/pg_control (performed last to ensure aborted restores cannot be started)
+2020-11-01 04:43:37.777 P00   INFO: restore command end: completed successfully (10263ms)
+</pre>
+
+
 
 ##### Monitoring
 
