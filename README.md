@@ -313,7 +313,7 @@ lines truncated
 
 At the end of the backup, a recovery.conf file is created in the data directory
 
-`postgres@pgvm7:~$ pcat recovery.conf`</br>
+`postgres@pgvm7:~$ cat recovery.conf`</br>
 `restore_command = '/usr/bin/pgbackrest --log-level-console=info --stanza=main archive-get %f "%p"'`</br>
 
 Start Postgresql cluster normally.
@@ -550,12 +550,13 @@ postgres@pgvm1:~$ curl -s http://50.51.52.81:8008/config | jq
 }
 </pre>
 
-Change the existing configuration
+Change and view the existing configuration
 
 <pre>
-curl -s -XPATCH -d '{"loop_wait":5,"ttl":20,"postgresql":{"parameters":{"max_connections":"101"}}}' http://50.51.52.81:8008/config | jq .
+postgres@pgvm1:~$ curl -s -XPATCH -d '{"loop_wait":5,"ttl":20,"postgresql":{"parameters":{"max_connections":"101"}}}' http://50.51.52.81:8008/config | jq .
 
-postgres@pgvm1:~$ curl -s http://50.51.52.81:8008/config | jq                                                                    {
+postgres@pgvm1:~$ curl -s http://50.51.52.81:8008/config | jq                                                                    
+{
   "maximum_lag_on_failover": 1048576,
   "retry_timeout": 10,
   "postgresql": {
