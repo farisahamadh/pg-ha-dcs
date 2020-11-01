@@ -1,5 +1,6 @@
 # Postgres HA setup with Patroni
-This document will walk through the steps to perform PostgreSQL HA setup (1 master and 2 standbys) with Patroni. 
+This document will walk through the steps to perform PostgreSQL HA setup (1 master and 2 standbys) with Patroni, etcd and HAProxy.
+Subsequently, backup will be configured with pgbackrest and restored on a new host. Details on monitoring using Patroni REST API is shown at the end.
 
 ### Environment details - 6 Linux VMs of following
 |VM Name |	Purpose	| IP address| Description |
