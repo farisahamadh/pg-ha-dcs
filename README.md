@@ -341,6 +341,15 @@ lines truncated
 2020-11-01 04:52:32.638 UTC [4748] LOG:  database system is ready to accept connections
 </pre>
 
+Follow the steps described earlier to configure Patroni and pgbackrest. Make sure to modify the respective parameter files in the new hosts pgvm7 and pgvm8. Providing below the patroni.yml and pgbackrest.conf files used to configure HA and backup. Make sure to change IP addresses in patroni.yml to point to the new servers and backups are going to new stanza.
+
+pgvm7 patroni.yml using [config/pgvm7/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm7/patroni.yml)</br>
+pgvm7 pgbackrest.conf using [config/pgvm7/pgbackrest1.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm7/pgbackrest1.conf)</br>
+
+pgvm8 patroni.yml using [config/pgvm8/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm8/patroni.yml)</br>
+pgvm8 pgbackrest.conf using [config/pgvm8/pgbackrest1.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm8/pgbackrest1.conf)</br>
+
+
 
 ##### Monitoring
 
