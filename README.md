@@ -575,7 +575,56 @@ postgres@pgvm1:~$ curl -s http://50.51.52.81:8008/config | jq
   "ttl": 20
   </pre>
   
-  
+If any change of configuration parameters requires restart, a pending restart flat will be exposed.
 
+<pre>
+postgres@pgvm1:~$ curl -s http://50.51.52.81:8008/patroni | jq
+{
+  "pending_restart": true,
+  "database_system_identifier": "6889331455358453954",
+  "postmaster_start_time": "2020-11-01 07:04:12.573 UTC",
+  "timeline": 22,
+  "cluster_unlocked": false,
+  "patroni": {
+    "scope": "postgres",
+    "version": "2.0.1"
+  },
+  "replication": [
+    {
+      "sync_state": "async",
+      "sync_priority": 0,
+      "client_addr": "50.51.52.82",
+      "state": "streaming",
+      "application_name": "pgvm2",
+      "usename": "replicator"
+    },
+    {
+      "sync_state": "async",
+      "sync_priority": 0,
+      "client_addr": "50.51.52.83",
+      "state": "streaming",
+      "application_name": "pgvm3",
+      "usename": "replicator"
+    }
+  ],
+  "state": "running",
+  "role": "master",
+  "xlog": {
+    "location": 436208232
+  },
+  "server_version": 120004
+}
+
+
+postgres@pgvm1:~$ patronictl -c /etc/patroni1.yml list
++ Cluster: postgres (6889331455358453954) -+----+-----------+-----------------+
+| Member | Host        | Role    | State   | TL | Lag in MB | Pending restart |
++--------+-------------+---------+---------+----+-----------+-----------------+
+| pgvm1  | 50.51.52.81 | Leader  | running | 22 |           | *               |
+| pgvm2  | 50.51.52.82 | Replica | running | 22 |       0.0 | *               |
+| pgvm3  | 50.51.52.83 | Replica | running | 22 |       0.0 | *               |
++--------+-------------+---------+---------+----+-----------+-----------------+
+
+</pre>
 
 
