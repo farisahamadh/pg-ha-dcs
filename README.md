@@ -358,47 +358,39 @@ Patroni provides rich REST API which used by itself and could be used for monito
 The following requests to Patroni REST API will return HTTP status code 200 only when the Patroni node is running as the leader.
 
 <pre>
-postgres@pgvm1:~$ curl -s -o /dev/null -w "%{http_code}" http://50.51.52.81:8008/leader
-200
-postgres@pgvm1:~$
-</pre></br>
-
-The following request returns Patroni cluster information in a JSON document 
-<pre>
-postgres@pgvm1:~$ curl -s http://50.51.52.81:8008/patroni | jq
+postgres@pgvm1:~$ curl -s http://50.51.52.81:8008/cluster | jq
 {
-  "database_system_identifier": "6889331455358453954",
-  "postmaster_start_time": "2020-11-01 07:04:12.573 UTC",
-  "timeline": 22,
-  "cluster_unlocked": false,
-  "patroni": {
-    "scope": "postgres",
-    "version": "2.0.1"
-  },
-  "replication": [
+  "members": [
     {
-      "sync_state": "async",
-      "sync_priority": 0,
-      "client_addr": "50.51.52.82",
-      "state": "streaming",
-      "application_name": "pgvm2",
-      "usename": "replicator"
+      "name": "pgvm1",
+      "timeline": 22,
+      "state": "running",
+      "host": "50.51.52.81",
+      "role": "leader",
+      "port": 5432,
+      "api_url": "http://50.51.52.81:8008/patroni"
     },
     {
-      "sync_state": "async",
-      "sync_priority": 0,
-      "client_addr": "50.51.52.83",
-      "state": "streaming",
-      "application_name": "pgvm3",
-      "usename": "replicator"
+      "name": "pgvm2",
+      "timeline": 22,
+      "lag": 0,
+      "state": "running",
+      "host": "50.51.52.82",
+      "role": "replica",
+      "port": 5432,
+      "api_url": "http://50.51.52.82:8008/patroni"
+    },
+    {
+      "name": "pgvm3",
+      "timeline": 22,
+      "lag": 0,
+      "state": "running",
+      "host": "50.51.52.83",
+      "role": "replica",
+      "port": 5432,
+      "api_url": "http://50.51.52.83:8008/patroni"
     }
-  ],
-  "state": "running",
-  "role": "master",
-  "xlog": {
-    "location": 436208232
-  },
-  "server_version": 120004
+  ]
 }
 </pre>
 
