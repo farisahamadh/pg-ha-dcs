@@ -310,10 +310,11 @@ lines truncated
 2020-11-01 04:43:37.777 P00   INFO: restore command end: completed successfully (10263ms)
 </pre>
 
-At the end of the backup, a recovery.conf file is created in the data directory
+At the end of the backup, a recovery signalled during next startup with the following files.
 
-`postgres@pgvm7:~$ cat recovery.conf`</br>
-`restore_command = '/usr/bin/pgbackrest --log-level-console=info --stanza=main archive-get %f "%p"'`</br>
+`postgres@pgvm7:~/data$ ls -l postgresql.auto.conf recovery.signal`</br>
+`-rw------- 1 postgres postgres 265 Nov  1 11:12 postgresql.auto.conf`</br>
+`-rw------- 1 postgres postgres   0 Nov  1 11:12 recovery.signal`</br>
 
 Start Postgresql cluster normally.
 <pre>
