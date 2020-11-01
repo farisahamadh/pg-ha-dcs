@@ -349,7 +349,7 @@ pgvm7 pgbackrest.conf using [config/pgvm7/pgbackrest1.conf](https://github.com/f
 pgvm8 patroni.yml using [config/pgvm8/patroni.yml](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm8/patroni.yml)</br>
 pgvm8 pgbackrest.conf using [config/pgvm8/pgbackrest1.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm8/pgbackrest1.conf)</br>
 
-
+Create new stanza in pgvm6 using [config/pgvm6/pgbackrest1.conf](https://github.com/farisahamadh/pgsql-ha/blob/main/config/pgvm6/pgbackrest1.conf)</br>
 
 ##### Monitoring
 
