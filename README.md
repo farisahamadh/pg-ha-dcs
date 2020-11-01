@@ -528,6 +528,52 @@ postgres@pgvm1:~$ curl -s http://50.51.52.81:8008/history | jq
 ]
 </pre>
 
+Patroni REST API call can also be used to view and update the dynamic configuration.
+<pre>
+postgres@pgvm1:~$ curl -s http://50.51.52.81:8008/config | jq
+{
+  "maximum_lag_on_failover": 1048576,
+  "retry_timeout": 10,
+  "postgresql": {
+    "use_slots": true,
+    "parameters": {
+      "hot_standby": "on",
+      "max_wal_senders": 8,
+      "wal_keep_segments": 20,
+      "max_replication_slots": 8,
+      "max_connections": "101"
+    },
+    "use_pg_rewind": true
+  },
+  "loop_wait": 10,
+  "ttl": 30
+}
+</pre>
+
+Change the existing configuration
+
+<pre>
+curl -s -XPATCH -d '{"loop_wait":5,"ttl":20,"postgresql":{"parameters":{"max_connections":"101"}}}' http://50.51.52.81:8008/config | jq .
+
+postgres@pgvm1:~$ curl -s http://50.51.52.81:8008/config | jq                                                                    {
+  "maximum_lag_on_failover": 1048576,
+  "retry_timeout": 10,
+  "postgresql": {
+    "use_slots": true,
+    "use_pg_rewind": true,
+    "parameters": {
+      "hot_standby": "on",
+      "max_wal_senders": 8,
+      "wal_keep_segments": 20,
+      "max_replication_slots": 8,
+      "max_connections": "101"
+    }
+  },
+  "loop_wait": 5,
+  "ttl": 20
+  </pre>
+  
+  
 
 
 
