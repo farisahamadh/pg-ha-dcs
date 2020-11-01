@@ -10,6 +10,8 @@ This document will walk through the steps to perform PostgreSQL HA setup (1 mast
 |pgvm4	| etcd |	50.51.52.84| Distributed configuration store |
 |pgvm5 |	HAProxy	| 50.51.52.85| Single endpoint for connecting to the cluster's leader |
 |pgvm6 |	pgbackrest repository	| 50.51.52.86| Backup repository server |
+|pgvm7 |	Postgres, Patroni	| 50.51.52.87| New vm for bootstrapping from backup |
+|pgvm8 |	Postgres, Patroni	| 50.51.52.88| standby for new PG cluster |
 
 ### VMs setup
 OS release version of all the Linux VMs used for this setup.</br>
